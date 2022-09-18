@@ -1,0 +1,55 @@
+body {
+  background-color: #a6a6a6;
+}
+
+.dashboard {
+	width:  100%;
+	height: 200px;
+	margin: 0;
+
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.block {
+	margin: 0;
+	width:  49%;
+	border: 2px solid black;
+	background-color: #f1f1f1;
+	display: inline-table;
+	text-align: center;
+}
+
+.button {
+	margin-top: 10px;
+}
+
+.textField {
+	width: 60%;
+}
+
+.textFieldButton {
+	width: 15%;
+}
+
+
+h1 {
+	padding-top: 30px;
+	padding-bottom: 25px;
+	margin: 0 auto;
+}
+
+input {
+	width: 80%;
+}
+
+label {
+	width: 100%;
+}
+
+p {
+	padding-top: 7px;
+	color: #ADADAD;
+}
