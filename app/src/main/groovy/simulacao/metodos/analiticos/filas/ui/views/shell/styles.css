@@ -1,5 +1,38 @@
-.queue_overview {
-	border-color: red;
-	width: 1000;
-	height: 500;
+body {
+	background-color: black;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+/*.row-container .queue_overview {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}*/
+
+/*76 - 123,8*/
+
+.container {
+	display: inline;
+	height: 100%;
+	width: 100%;
+}
+
+.window {
+	width: 100%;
+}
+
+.queue {
+	height: 20vw;
+	width: 100%;
+}
+
+div.shell.terminal {
+	height: 30vw;
+	width: 100%;
+	bottom: 0;
 }

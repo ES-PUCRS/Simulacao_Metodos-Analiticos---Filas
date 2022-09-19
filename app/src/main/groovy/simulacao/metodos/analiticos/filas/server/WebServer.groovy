@@ -87,7 +87,7 @@ class WebServer
 				 *	REST Method and URI Path will be shown green
 				 */
 				String route = path.substring(1)
-				String view  = path.replaceAll(".*/","")
+				def view  = path.replaceAll(".*/","")
 				if(!path.contains(".css") && !path.contains("favicon") && !route.isEmpty())
 					println "${ANSI.GREEN}$exchange.requestMethod $path${ANSI.RESET} -> Params: $params"
 
@@ -99,14 +99,17 @@ class WebServer
 				def render
 				if (path.contains(".ico")) {
 					file = new File(properties."ui.assets.path", route)
-				} else if (path.contains(".css")) {
-					file = new File(views, "${route}/styles.css")
+				} else if (path.contains(".css") || path.contains(".js")) {
+					file = new File(views, route)
 					if (!file.exists()) file = new File(views, "http/404/styles.css")
 				} else {
 					try {
 						if(route.isEmpty()) file = new File(views, "shell/shell.html")
 						else file = new File(views, "${route}/${view}.html")
-					} catch (e) { e.printStackTrace() }
+					} catch (e) {
+						if(properties."app.debug" as boolean)
+							e.printStackTrace()
+					}
 					render = Render.handler(view, params)
 				}
 

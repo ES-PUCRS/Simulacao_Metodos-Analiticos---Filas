@@ -5,7 +5,7 @@ import simulacao.metodos.analiticos.filas.App
 import groovy.text.SimpleTemplateEngine 
 import groovy.lang.Lazy
 
-class page {
+class queues {
 
 	@Lazy
 	private static Properties properties
@@ -13,6 +13,7 @@ class page {
 	private static final String pageName = "queues"
 
 	def static render(def map) {
+		println "on queues"
 		def file = new File(views, "${pageName}/page.html")
 		def writeList 		= ""
 		def readList 		= ""

@@ -33,7 +33,7 @@ class Simulation
 			}
 		} else {
 			// Start ui web server
-			Simulation.web = true
+			Simulation.web = false
 			new WebServer().start()
 		}
 	}

@@ -3,20 +3,47 @@
 
 <head>
 	<title>Simulacao & Metodos Analiticos</title>
+	<link rel="stylesheet" type="text/css" href="shell/styles.css"/>
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css"/>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.min.js"></script>
-	<link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css"/>
-	<link rel="stylesheet" href="shell/styles.css"/>
 </head>
 
+<!-- 
+	<div id="queue_div">
+		<iframe id="queue_window" src="queues" title="description"></iframe>
+</div> -->
+
 <body>
-	<div class="queue_overview" >
-		<iframe src="queues" title="description"></iframe>
+	<!--VW = Viewport -> 100% == full side-->
+	<div class="container">
+		<div id="iframe-container" class="window">
+			<iframe id="iframe1" class="queue" src="queues" onload="this.style.visibility='visible';" frameborder="0"></iframe>
+		</div>
+
+		<div class="window">
+			<div class="shell" style="--terminal-height: 100%">
+		</div>
 	</div>
 
 	<script>
-		const port = "8080";
-		$('body').terminal({
+		setInterval(function() {
+			var container = document.getElementById('iframe-container');
+			var iframe2 = document.createElement('iframe');
+			iframe2.class = 'queue';
+			iframe2.src = 'queues';
+			iframe2.style.visibility = 'hidden';
+			iframe2.frameborder = '0';
+			container.appendChild(iframe2);
+			iframe2.style.visibility = 'visible';
+			container.removeChild(container.getElementsByTagName('iframe')[1]);
+		}, 1000);
+
+		const port 		= "8080";
+		const greetings = 'Simulacao & Metodos Analiticos,\n'+
+						'RELEASE IO + Fila simples' +
+						'\n=> Type help see the commands list';
+		$('.shell').terminal({
 
 		    run: function(file){
 				fetch('http://localhost:8080/cpu_execute?file=' + file)
@@ -84,11 +111,6 @@
 		        return res.text();
     		},
 
-		    cls: function(){
-		        this.exec('clear');
-		        this.echo(  'Sistemas Operacionais. Maquina virtual,\n' +
-							'RELEASE VM + GM + GP + IO');
-		    },
 
 
 		    output: function(){
@@ -104,6 +126,12 @@
 		    commit: function(comment){
 				fetch('http://localhost:8080/commit?comment='+comment)
 		            .then(r => r.text())
+		    },
+
+
+		    cls: function(){
+		        this.exec('clear');
+		        this.echo(greetings);
 		    },
 
 		    help: function(){
@@ -130,33 +158,17 @@
 
 		    		"\n\n > run [File || \"File1, ...,File(n)\"]"+
 		    		"\n Execute the file on the CPU if no param have"+ 
-		    		"\n been given on param."+
-		    		"\n Also can load on CPU and run all programs"+
-		    		"\n given on params"+
-
-					"\n\n > dump --memory <Program || \"Program1, ..., Program(N)\">"+
-					"\n Shows the memory from n until m real positions"+	
-
-					"\n\n > dump --memory <n..m>"+
-					"\n Shows the memory from n until m real positions"+
-
-					"\n\n > dump --pages <n..m>"+
-					"\n Shows the n until m pages of memory"+
-
-					"\n\n > dump --registers"+
-					"\n Shows the CPU registers status"+
-
-					"\n\n > free <program>"+
-					"\n Remove the program from memory.\n"
+		    		"\n Execute the file on the CPU if no param have"+
+		    		"\n Execute the file on the CPU if no param have"+
+		    		"\n Execute the file on the CPU if no param have"+
+		    		"\n Execute the file on the CPU if no param have"
 	    		);
 		    }
 
 		}, {
 			checkArity: false,
 			completion: true,
-		    greetings: 	'Simulacao & Metodos Analiticos,\n'+
-						'RELEASE IO + Fila simples' +
-						'\n=> Type help see the commands list'
+		    greetings: greetings
 		});
 	</script>
 </body>
